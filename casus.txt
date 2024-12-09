@@ -1,1 +1,2 @@
 2'den fazla tekrar eden kimlik numaraları:
+27359426558 (tekrar sayısı: 5)
