@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 int main() {
@@ -36,7 +35,7 @@ int main() {
         satirSayac++;
     }
     fclose(girisDosya);
-    
+
     // Çıktı dosyasını aç
     FILE *casusDosya = fopen("/home/voltry/CLionProjects/thebigcybersecurityproject/casus.txt", "w");
     if (casusDosya == NULL) {
@@ -44,23 +43,34 @@ int main() {
         return 1;
     }
 
-    // Yinelenen satırları ve sayısını bul ve çıktı dosyasına yaz
+    // Aynı olan satırları ve sayısını bul ve çıktı dosyasına yaz
     for (int i = 0; i < satirSayac; i++) {
-        int tekrarSayisi = 1;
+        int k = 1;
         if (satirDizi[i] == NULL) continue; // Daha önce işlenmiş satırları atla
 
         for (int j = i + 1; j < satirSayac; j++) {
-            if (satirDizi[j] != NULL && strcmp(satirDizi[i], satirDizi[j]) == 0) {
-                tekrarSayisi++;
+            if (satirDizi[j] != NULL && strcmp(satirDizi[i], satirDizi[j]) == 0) { //strcmp == 0 ise eşit, 1 ise eşit değil
+                k += 1;
                 satirDizi[j] = NULL; // İşlenmiş olarak işaretle
             }
         }
-
-        if (tekrarSayisi > 1) {
-            fprintf(casusDosya, "Casus'un TC Kimlik Numarası: %s, Kaç kere giriş çıkış yaptığı: %d\n", satirDizi[i], tekrarSayisi);
+        if (k > 1) {
+            fprintf(casusDosya, "Casus'un TC Kimlik Numarası: %s\n", satirDizi[i]);
         }
     }
     fclose(casusDosya);
-    printf("Casus bulundu ve casus.txt dosyasına yazdırıldı :)");
+    printf("Olası casuslar casus.txt dosyasına yazıldı.");
+
     return 0;
 }
+
+
+/*
+ * int i = 1;
+ * int j = 2;
+ * strcmp(i,j);
+ * printf("%d", strcmp);
+ *
+ *  0 = eşit
+ *  1 = eşit değil
+ */

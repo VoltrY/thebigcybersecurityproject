@@ -1,7 +1,1 @@
-Casus'un TC Kimlik Numarası: 27359426558, Kaç kere giriş çıkış yaptığı: 4
-
-
-
-satirDizi[]
-1. 93656977280
-2.
+Casus'un TC Kimlik Numarası: 27359426558
