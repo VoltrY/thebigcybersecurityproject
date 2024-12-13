@@ -65,12 +65,3 @@ int main() {
 }
 
 
-/*
- * int i = 1;
- * int j = 2;
- * strcmp(i,j);
- * printf("%d", strcmp);
- *
- *  0 = eşit
- *  1 = eşit değil
- */
