@@ -1,3 +1,0 @@
-/home/voltry/CLionProjects/thebigcybersecurityproject/cmake-build-debug/CMakeFiles/thebigcybersecurityproject.dir
-/home/voltry/CLionProjects/thebigcybersecurityproject/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/voltry/CLionProjects/thebigcybersecurityproject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
