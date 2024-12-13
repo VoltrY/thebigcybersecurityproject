@@ -2,94 +2,65 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SATIR_UZUNLUGU 256  // Satır uzunluğu sınırı
-#define KIMLIK_UZUNLUGU 11  // Kimlik numarası uzunluğu
-
-// Dinamik bellek yönetimi için düğüm yapısı
-typedef struct Kimlik {
-    char numara[KIMLIK_UZUNLUGU + 1];
-    int tekrar_sayisi;
-    struct Kimlik *sonraki;
-} Kimlik;
-
-Kimlik* kimlik_bul_veya_ekle(Kimlik **liste, char *numara) {
-    Kimlik *gecici = *liste;
-
-    // Var olan kimlik numarasını bul
-    while (gecici != NULL) {
-        if (strcmp(gecici->numara, numara) == 0) {
-            gecici->tekrar_sayisi++;
-            return gecici;
-        }
-        gecici = gecici->sonraki;
-    }
-
-    // Yeni bir kimlik numarası ekle
-    Kimlik *yeni = (Kimlik*)malloc(sizeof(Kimlik));
-    strcpy(yeni->numara, numara);
-    yeni->tekrar_sayisi = 1;
-    yeni->sonraki = *liste;
-    *liste = yeni;
-
-    return yeni;
-}
-
-void kimlikleri_temizle(Kimlik *liste) {
-    while (liste != NULL) {
-        Kimlik *silinecek = liste;
-        liste = liste->sonraki;
-        free(silinecek);
-    }
-}
-
 int main() {
-    FILE *giris_dosyasi, *cikis_dosyasi;
-    char satir[SATIR_UZUNLUGU];
-    Kimlik *kimlik_listesi = NULL;
+    // Satırları okumak için kullanılacak tampon değişken
+    char satirTampon[256];
+    //Dosyadan okunan her bir satır geçici olarak burada saklanır. sonrada bu satır satirDizi dizisine kopyalanır
 
-    // Giriş dosyasını aç
-    giris_dosyasi = fopen("/home/voltry/CLionProjects/thebigcybersecurityproject/giris.txt", "r");
-    if (giris_dosyasi == NULL) {
-        perror("giris.txt açılamadı");
+    char *satirDizi[100]; // Satırları dinamik olarak tutmak için bir dizi
+    // POİNTER KULLANIM AMACI
+    //strdup ve satirTampon değişkenlerindeki her satırın kopyası bu diziye aktarılır her satırın adresi burda tutulur.
+    int satirSayac = 0; // Okunan satır sayısını takip eder
+    // her satır okunduğunda bir arttırılır ve satirDizi değişkeninde uygun bir yere yerleştirilir.
+
+    // Kaynak dosyayı aç
+    FILE *girisDosya = fopen("/home/voltry/CLionProjects/thebigcybersecurityproject/giris.txt", "r");
+    if (girisDosya == NULL) {
+        printf("Dosya açılamadı. Dosya dizinini kontrol ediniz.\n");
+        return 1;
+    }
+    // Dosyayı satır satır oku
+    while (fgets(satirTampon, sizeof(satirTampon), girisDosya) != NULL) {
+        size_t satirUzunluk = strlen(satirTampon); // 2139842143294
+        // satirTampon içindeki satır uzunluğunu hesaplayıp satirUzunluk'a atar
+        if (satirTampon[satirUzunluk - 1] == '\n') {
+            satirTampon[satirUzunluk - 1] = '\0';
+        }
+
+        // Okunan satırı satirDizi dizisine kopyala
+        satirDizi[satirSayac] = strdup(satirTampon);
+        if (satirDizi[satirSayac] == NULL) {
+            printf("Boş satır veya Satır okunamadı.\n");
+            continue;
+        }
+        satirSayac++;
+    }
+    fclose(girisDosya);
+    
+    // Çıktı dosyasını aç
+    FILE *casusDosya = fopen("/home/voltry/CLionProjects/thebigcybersecurityproject/casus.txt", "w");
+    if (casusDosya == NULL) {
+        printf("Dosya açılamadı. Dosya dizinini kontrol ediniz\n");
         return 1;
     }
 
-    // Kimlik numaralarını oku
-    while (fgets(satir, SATIR_UZUNLUGU, giris_dosyasi)) {
-        // Satır sonundaki yeni satır karakterini temizle
-        satir[strcspn(satir, "\n")] = '\0';
+    // Yinelenen satırları ve sayısını bul ve çıktı dosyasına yaz
+    for (int i = 0; i < satirSayac; i++) {
+        int tekrarSayisi = 1;
+        if (satirDizi[i] == NULL) continue; // Daha önce işlenmiş satırları atla
 
-        // Kimlik numarası uzunluğunu kontrol et
-        if (strlen(satir) == KIMLIK_UZUNLUGU) {
-            kimlik_bul_veya_ekle(&kimlik_listesi, satir);
+        for (int j = i + 1; j < satirSayac; j++) {
+            if (satirDizi[j] != NULL && strcmp(satirDizi[i], satirDizi[j]) == 0) {
+                tekrarSayisi++;
+                satirDizi[j] = NULL; // İşlenmiş olarak işaretle
+            }
+        }
+
+        if (tekrarSayisi > 1) {
+            fprintf(casusDosya, "Casus'un TC Kimlik Numarası: %s, Kaç kere giriş çıkış yaptığı: %d\n", satirDizi[i], tekrarSayisi);
         }
     }
-    fclose(giris_dosyasi);
-
-    // Çıkış dosyasını oluştur
-    cikis_dosyasi = fopen("/home/voltry/CLionProjects/thebigcybersecurityproject/casus.txt", "w");
-    if (cikis_dosyasi == NULL) {
-        perror("casus.txt açılamadı");
-        kimlikleri_temizle(kimlik_listesi);
-        return 1;
-    }
-
-    fprintf(cikis_dosyasi, "2'den fazla tekrar eden kimlik numaraları:\n");
-
-    // Tekrar eden kimlik numaralarını yaz
-    Kimlik *gecici = kimlik_listesi;
-    while (gecici != NULL) {
-        if (gecici->tekrar_sayisi > 2) {
-            fprintf(cikis_dosyasi, "%s (tekrar sayısı: %d)\n", gecici->numara, gecici->tekrar_sayisi);
-        }
-        gecici = gecici->sonraki;
-    }
-
-    fclose(cikis_dosyasi);
-
-    // Dinamik bellek temizliği
-    kimlikleri_temizle(kimlik_listesi);
-
-    printf("İşlem tamamlandı. Tekrar eden kimlik numaraları casus.txt dosyasına kaydedildi.\n");
+    fclose(casusDosya);
+    printf("Casus bulundu ve casus.txt dosyasına yazdırıldı :)");
     return 0;
 }

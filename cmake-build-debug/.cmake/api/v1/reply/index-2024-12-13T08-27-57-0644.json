@@ -8,10 +8,10 @@
 		},
 		"paths" : 
 		{
-			"cmake" : "/home/voltry/\u0130ndirilenler/clion-2024.3/bin/cmake/linux/x64/bin/cmake",
-			"cpack" : "/home/voltry/\u0130ndirilenler/clion-2024.3/bin/cmake/linux/x64/bin/cpack",
-			"ctest" : "/home/voltry/\u0130ndirilenler/clion-2024.3/bin/cmake/linux/x64/bin/ctest",
-			"root" : "/home/voltry/\u0130ndirilenler/clion-2024.3/bin/cmake/linux/x64/share/cmake-3.30"
+			"cmake" : "/home/voltry/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake",
+			"cpack" : "/home/voltry/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cpack",
+			"ctest" : "/home/voltry/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/ctest",
+			"root" : "/home/voltry/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30"
 		},
 		"version" : 
 		{
@@ -35,7 +35,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-8b68618654f660f1e1af.json",
+			"jsonFile" : "cache-v2-610b4f92b563839ac0f7.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -44,7 +44,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cmakeFiles-v1-da7e9eb52f75f18b9c5d.json",
+			"jsonFile" : "cmakeFiles-v1-57df87f024bfcda98bc4.json",
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
@@ -66,7 +66,7 @@
 	{
 		"cache-v2" : 
 		{
-			"jsonFile" : "cache-v2-8b68618654f660f1e1af.json",
+			"jsonFile" : "cache-v2-610b4f92b563839ac0f7.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -76,7 +76,7 @@
 		},
 		"cmakeFiles-v1" : 
 		{
-			"jsonFile" : "cmakeFiles-v1-da7e9eb52f75f18b9c5d.json",
+			"jsonFile" : "cmakeFiles-v1-57df87f024bfcda98bc4.json",
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
