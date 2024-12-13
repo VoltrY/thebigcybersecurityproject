@@ -7,6 +7,7 @@ int main() {
     //Dosyadan okunan her bir satır geçici olarak burada saklanır. sonrada bu satır satirDizi dizisine kopyalanır
 
     char *satirDizi[100]; // Satırları dinamik olarak tutmak için bir dizi
+
     // POİNTER KULLANIM AMACI
     //strdup ve satirTampon değişkenlerindeki her satırın kopyası bu diziye aktarılır her satırın adresi burda tutulur.
     int satirSayac = 0; // Okunan satır sayısını takip eder
@@ -19,19 +20,14 @@ int main() {
         return 1;
     }
     // Dosyayı satır satır oku
-    while (fgets(satirTampon, sizeof(satirTampon), girisDosya) != NULL) {
-        size_t satirUzunluk = strlen(satirTampon); // 2139842143294
+    while (fgets(satirTampon, sizeof(satirTampon), girisDosya) != NULL) { //fgets değerleri string olarak okur
+        long unsigned int satirUzunluk = strlen(satirTampon); //
         // satirTampon içindeki satır uzunluğunu hesaplayıp satirUzunluk'a atar
-        if (satirTampon[satirUzunluk - 1] == '\n') {
-            satirTampon[satirUzunluk - 1] = '\0';
+        if (satirTampon[satirUzunluk - 1] == '\n') { // satirUzunlukdan fgets'in eklediği \0'ı sileriz. ve \n var mı diye bakıyoruz
+            satirTampon[satirUzunluk - 1] = '\0'; // var olduğu takdirde fgets'in koyduğu \n yerine \0 yani NULL koyarız
         }
-
         // Okunan satırı satirDizi dizisine kopyala
-        satirDizi[satirSayac] = strdup(satirTampon);
-        if (satirDizi[satirSayac] == NULL) {
-            printf("Boş satır veya Satır okunamadı.\n");
-            continue;
-        }
+        satirDizi[satirSayac] = strdup(satirTampon); // String bir değişkene direkt eşitlenemediği için string dupplicate kullanıyoruz.
         satirSayac++;
     }
     fclose(girisDosya);
@@ -55,13 +51,13 @@ int main() {
             }
         }
         if (k > 1) {
-            fprintf(casusDosya, "Casus'un TC Kimlik Numarası: %s\n", satirDizi[i]);
+            fprintf(casusDosya, "Casus'un TC Kimlik Numarası: %s\n", satirDizi[i]); // %s = string demektir.
         }
+
     }
+
     fclose(casusDosya);
     printf("Olası casuslar casus.txt dosyasına yazıldı.");
 
     return 0;
 }
-
-
