@@ -41,13 +41,12 @@ int main() {
 
     // Aynı olan satırları ve sayısını bul ve çıktı dosyasına yaz
     for (int i = 0; i < satirSayac; i++) {
-        int k = 1;
+        int k = 1; // 1'den başlatırız çünkü eğer kurbanın kaç kere çıkıp girdiğini bulmak istersek 0 1 2 3 olacağından 3 cevabını almış oluruz fakat 1'den başlatırsak 4 cevabını alırız
         if (satirDizi[i] == NULL) continue; // Daha önce işlenmiş satırları atla
-
         for (int j = i + 1; j < satirSayac; j++) {
             if (satirDizi[j] != NULL && strcmp(satirDizi[i], satirDizi[j]) == 0) { //strcmp == 0 ise eşit, 1 ise eşit değil
-                k += 1;
-                satirDizi[j] = NULL; // İşlenmiş olarak işaretle
+                k += 1; // k'yı arttırırız çünkü casusumuz bulundu.
+                satirDizi[j] = NULL; // İşlenmiş olarak işaretleriz.
             }
         }
         if (k > 1) {
