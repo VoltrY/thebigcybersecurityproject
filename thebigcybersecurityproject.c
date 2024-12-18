@@ -15,7 +15,7 @@ int main() {
     *    1234
     *    123
     *    12
-    *    Dinamik veri tutumunu satır satır böyle sağlayabiliriz ve bellekten tasarruf etmiş oluruz.
+    *    Dinamik veri tutumunu her satıra kendi değeri kadar yer ayırarak bellekten tasarruf etmiş oluruz.
     */
     //strdup ve satirTampon değişkenlerindeki her satırın kopyası bu diziye aktarılır her satırın adresi burda tutulur.
     int satirSayac = 0; // Okunan satır sayısını takip eder
