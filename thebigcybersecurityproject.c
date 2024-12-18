@@ -4,9 +4,11 @@
 int main() {
     // Satırları okumak için kullanılacak tampon değişken
     char satirTampon[256];
+    //unsigned  -256 , +255
+    // signed 0 , +256
     //Dosyadan okunan her bir satır geçici olarak burada saklanır. sonrada bu satır satirDizi dizisine kopyalanır
 
-    char *satirDizi[100]; // Satırları dinamik olarak tutmak için bir dizi
+    char *satirDizi[60]; // Satırları dinamik olarak tutmak için bir dizi
 
     // POİNTER KULLANIM AMACI : her satırdaki verinin değerini olduğu değere eşitler ve dinamik bir veri tutumu sağlar.
     /*
@@ -26,7 +28,7 @@ int main() {
     if (girisDosya == NULL) {
         printf("Dosya açılamadı. Dosya dizinini kontrol ediniz.\n");
         return 1;
-    }
+    }123123123 
     // Dosyayı satır satır oku
     while (fgets(satirTampon, sizeof(satirTampon), girisDosya) != NULL) { //fgets değerleri string olarak okur
         long unsigned int satirUzunluk = strlen(satirTampon); //
@@ -37,7 +39,7 @@ int main() {
         // Okunan satırı satirDizi dizisine kopyala
         satirDizi[satirSayac] = strdup(satirTampon); // String bir değişkene direkt eşitlenemediği için string dupplicate kullanıyoruz.
         satirSayac++;
-    }
+    } 
     fclose(girisDosya);
 
     // Çıktı dosyasını aç
@@ -49,8 +51,9 @@ int main() {
 
     // Aynı olan satırları ve sayısını bul ve çıktı dosyasına yaz
     for (int i = 0; i < satirSayac; i++) {
-        int k = 1; // 1'den başlatırız çünkü eğer kurbanın kaç kere çıkıp girdiğini bulmak istersek 0 1 2 3 olacağından 3 cevabını almış oluruz fakat 1'den başlatırsak 4 cevabını alırız
-        if (satirDizi[i] == NULL) continue; // Daha önce işlenmiş satırları atla
+        int k = 1; // 1'den başlatırız çünkü eğer casusun kaç kere çıkıp girdiğini bulmak istersek 0 1 2 3 olacağından 3 cevabını almış oluruz fakat 1'den başlatırsak 4 cevabını alırız
+        if (satirDizi[i] == NULL) 
+            continue; // Daha önce işlenmiş satırları atla
         for (int j = i + 1; j < satirSayac; j++) {
             if (satirDizi[j] != NULL && strcmp(satirDizi[i], satirDizi[j]) == 0) { //strcmp == 0 ise eşit, 1 ise eşit değil
                 k += 1; // k'yı arttırırız çünkü casusumuz bulundu.
@@ -60,6 +63,7 @@ int main() {
         if (k > 1) {
             fprintf(casusDosya, "Casus'un TC Kimlik Numarası: %s\n", satirDizi[i]); // %s = string demektir.
         }
+        
 
     }
 
