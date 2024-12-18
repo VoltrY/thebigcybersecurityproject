@@ -8,7 +8,15 @@ int main() {
 
     char *satirDizi[100]; // Satırları dinamik olarak tutmak için bir dizi
 
-    // POİNTER KULLANIM AMACI
+    // POİNTER KULLANIM AMACI : her satırdaki verinin değerini olduğu değere eşitler ve dinamik bir veri tutumu sağlar.
+    /*
+    *    Örneğin;
+    *    12345
+    *    1234
+    *    123
+    *    12
+    *    Dinamik veri tutumunu satır satır böyle sağlayabiliriz ve bellekten tasarruf etmiş oluruz.
+    */
     //strdup ve satirTampon değişkenlerindeki her satırın kopyası bu diziye aktarılır her satırın adresi burda tutulur.
     int satirSayac = 0; // Okunan satır sayısını takip eder
     // her satır okunduğunda bir arttırılır ve satirDizi değişkeninde uygun bir yere yerleştirilir.
