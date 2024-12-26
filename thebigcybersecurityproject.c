@@ -21,7 +21,7 @@ int main() {
     // Dosyayı satır satır oku ve dinamik diziye aktar
     while (fgets(satirTampon, sizeof(satirTampon), girisDosya) != NULL) {
         // Satırın uzunluğunu hesapla
-        long unsigned int satirUzunluk = strlen(satirTampon);
+        unsigned long satirUzunluk = strlen(satirTampon);
 
         // '\n' karakterini sonundan çıkar
         if (satirTampon[satirUzunluk - 1] == '\n') {
