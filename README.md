@@ -5,6 +5,6 @@
   </head>
   <body>
     <h1 style="text-align: center;">Akış Şeması</h1>
-    <img src="flowchart/flowchart.jpg" alt="Projenin akış şeması" style="text-align: center;">
+    <img src="flowchart/projeflowchart.jpg" alt="Projenin akış şeması" style="text-align: center;">
   </body>
 </html>
